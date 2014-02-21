@@ -7,7 +7,7 @@ var app = express();
 
 app.engine('ejs', engine);
 
-app.set('port', 3000);
+app.set('port', 1001);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.use(express.logger('dev'));
@@ -70,9 +70,6 @@ app.get('/product/:name', function (req, res) {
 
 app.get('/:page', function (req, res) {
 	var page = req.params.page;
-
-	console.log(1);
-	console.log(page);
 	var breadcrumb = '> ' + page;
 	var options = _getRenderOptions(page, breadcrumb);
 	_render(req, res, page, options);

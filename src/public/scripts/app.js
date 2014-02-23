@@ -1,18 +1,7 @@
-require('./pages/list');
-require('./pages/product');
-require('./pages/search');
-
-var Bootstrap = require('./bootstrap');
-var bootstrap = new Bootstrap();
-bootstrap.boot();
+new (require('./components/title'))().initialize(); // event
+new (require('./components/breadcrumb'))().initialize();
+new (require('./components/view'))().initialize();
+new (require('./services/pjax'))().initialize();
 
 var pageComponent = document.getElementById('page-component').value;
-var Component = require(pageComponent);
-var component = new Component();
-component.initialize();
-
-var Pjax = require('./services/pjax');
-var pjax = new Pjax();
-pjax.bind(document.body);
-
-console.log('boot time', window.performance.now() / 1000, 'sec');
+document.body.dispatchEvent(new CustomEvent('ui:navigation:boot', { 'detail': {component: pageComponent} }));

@@ -9,11 +9,7 @@ p._changeBreadcrumb = function (evt) {
 };
 
 p.initialize = function() {
-	console.log('Breadcrumb initialize');
 	document.body.addEventListener('ui:navigation:after', this._changeBreadcrumb);
-};
-
-p.destroy = function() {
 };
 
 module.exports = Breadcrumb;

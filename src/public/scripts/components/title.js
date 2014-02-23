@@ -12,7 +12,4 @@ p.initialize = function() {
 	document.body.addEventListener('ui:navigation:after', this._changeTitle);
 };
 
-p.destroy = function() {
-};
-
 module.exports = Title;

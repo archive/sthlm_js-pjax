@@ -1,44 +1,18 @@
-/*define([
-	'libs/underscore',
-	'libs/jquery',
-	'libs/flight'
-], function (
-	_,
-	$,
-	Flight
-) {
-	'use strict';
-
-	return Flight.defineComponent(function Search() {
-
-		this.defaultAttrs({
-			searchText: '.search-text',
-			searchButton: '.search-action'
-		});
-
-		this._search = function () {
-			var value = this.select('searchText').val();
-			alert('search on ' + value);
-		};
-
-		this.after('initialize', function () {
-			this.on('click', {
-				searchButton: this._search
-			});
-		});
-
-	});
-
-});*/
-
 var Search = function () {
 };
 
+var p = Search.prototype;
+
+p._search = function () {
+	alert('search!');
+};
+
 Search.prototype.initialize = function() {
-	console.log('Search initialize');
+	document.querySelector('[name=search-action]').addEventListener('click', this._search, false);
 };
 
 Search.prototype.destroy = function() {
+	document.querySelector('[name=search-action]').removeEventListener('click', this._search, false);
 };
 
 module.exports = Search;

@@ -23,10 +23,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.errorHandler());
 
 var _render = function (req, res, page, options) {
-	options.pageComponent = './pages/' + page;
+	options.pageComponent = '/pages/' + page;
 	if (req.header('X-PJAX')) {
 		_pjaxRender(req, res, page, options);
 	} else {
+		console.log(page, options);
 		res.render(page, options);
 	}
 };
@@ -49,10 +50,11 @@ var _pjaxRender = function (req, res, page, options) {
 		var data = {
 			title: options.title,
 			view: {
-				component: './pages/' + page,
+				component: '/pages/' + page,
 				content: view
 			},
-			breadcrumb: options.breadcrumb
+			breadcrumb: options.breadcrumb,
+			url: '/' + page + (options.name || '')
 		};
 		res.json(data);
 
@@ -60,15 +62,18 @@ var _pjaxRender = function (req, res, page, options) {
 };
 
 app.get('/product/:name', function (req, res) {
+	console.log(1);
 	var name = req.params.name;
 	var page = 'product ' + name;
 	var breadcrumb = '> list > ' + page ;
 	var options = _getRenderOptions(page, breadcrumb);
+	options.name = '/' + name;
 	options.productName = 'Product ' + name;
 	_render(req, res, 'product', options);
 });
 
 app.get('/:page', function (req, res) {
+	console.log(2);
 	var page = req.params.page;
 	var breadcrumb = '> ' + page;
 	var options = _getRenderOptions(page, breadcrumb);
@@ -76,6 +81,7 @@ app.get('/:page', function (req, res) {
 });
 
 app.get('/', function (req, res) {
+	console.log(3);
 	var page = 'list';
 	var breadcrumb = '> ' + page;
 	var options = _getRenderOptions(page, breadcrumb);

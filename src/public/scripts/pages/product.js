@@ -1,5 +1,4 @@
-var Product = function () {
-};
+var Product = function () {};
 
 Product.prototype.initialize = function() {
 };

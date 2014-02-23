@@ -4,19 +4,14 @@ var path = require('path');
 var engine = require('ejs-locals');
 
 var app = express();
-
 app.engine('ejs', engine);
-
 app.set('port', 1001);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.use(express.logger('dev'));
 app.use(express.favicon());
-
-//app.use(express.bodyParser());
 app.use(express.json());
 app.use(express.urlencoded());
-
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
@@ -27,7 +22,6 @@ var _render = function (req, res, page, options) {
 	if (req.header('X-PJAX')) {
 		_pjaxRender(req, res, page, options);
 	} else {
-		console.log(page, options);
 		res.render(page, options);
 	}
 };
@@ -62,7 +56,6 @@ var _pjaxRender = function (req, res, page, options) {
 };
 
 app.get('/product/:name', function (req, res) {
-	console.log(1);
 	var name = req.params.name;
 	var page = 'product ' + name;
 	var breadcrumb = '> list > ' + page ;
@@ -73,7 +66,6 @@ app.get('/product/:name', function (req, res) {
 });
 
 app.get('/:page', function (req, res) {
-	console.log(2);
 	var page = req.params.page;
 	var breadcrumb = '> ' + page;
 	var options = _getRenderOptions(page, breadcrumb);
@@ -81,7 +73,6 @@ app.get('/:page', function (req, res) {
 });
 
 app.get('/', function (req, res) {
-	console.log(3);
 	var page = 'list';
 	var breadcrumb = '> ' + page;
 	var options = _getRenderOptions(page, breadcrumb);

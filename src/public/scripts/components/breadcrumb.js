@@ -1,5 +1,4 @@
-var Breadcrumb = function () {
-};
+var Breadcrumb = function () {};
 
 var p = Breadcrumb.prototype;
 

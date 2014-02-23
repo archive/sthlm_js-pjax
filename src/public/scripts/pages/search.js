@@ -1,5 +1,4 @@
-var Search = function () {
-};
+var Search = function () {};
 
 var p = Search.prototype;
 

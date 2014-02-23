@@ -1,5 +1,4 @@
-var List = function () {
-};
+var List = function () {};
 
 var p = List.prototype;
 

@@ -1,5 +1,4 @@
-var Title = function () {
-};
+var Title = function () {};
 
 var p = Title.prototype;
 

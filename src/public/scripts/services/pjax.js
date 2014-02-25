@@ -7,6 +7,7 @@ var p = Pjax.prototype;
 p.initialize = function() {
     document.body.addEventListener('click', this._possiblePjaxNavigation.bind(this), false);
     window.addEventListener('popstate', this._popstate.bind(this));
+    // todo init: history.replaceState({url: location.pathname}, '', location.pathname);
 };
 
 p._possiblePjaxNavigation = function (evt) {
